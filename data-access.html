@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twin Genetic Data Access Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .data-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .data-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .data-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+        
+        .meta-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .meta-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .meta-value {
+            color: var(--text-color);
+            font-weight: bold;
+        }
+        
+        .access-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .btn-access {
+            background: linear-gradient(135deg, var(--success-color), #059669);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-access:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-info {
+            background: var(--border-color);
+            color: var(--text-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-info:hover {
+            background: #475569;
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .difficulty-easy {
+            background: var(--success-color);
+            color: white;
+        }
+        
+        .difficulty-medium {
+            background: var(--warning-color);
+            color: white;
+        }
+        
+        .difficulty-hard {
+            background: var(--danger-color);
+            color: white;
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .quick-link-card {
+            background: linear-gradient(135deg, var(--card-bg), #334155);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+        }
+        
+        .quick-link-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+        
+        .quick-link-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .tutorial-step {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        
+        .tutorial-step h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        code {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: var(--nucleotide-g);
+        }
+        
+        .code-block {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+        }
+        
+        .code-block code {
+            background: none;
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 Twin Genetic Data Access Portal</h1>
+            <p class="subtitle">Your gateway to real genomic datasets</p>
+        </header>
+
+        <div class="card">
+            <h2>🚀 Quick Access Links</h2>
+            <div class="quick-links">
+                <a href="https://www.ncbi.nlm.nih.gov/geo/" target="_blank" class="quick-link-card">
+                    <div class="quick-link-icon">🧬</div>
+                    <h3>GEO Database</h3>
+                    <p>Gene Expression Omnibus - Easiest to start</p>
+                </a>
+                
+                <a href="https://www.ncbi.nlm.nih.gov/sra" target="_blank" class="quick-link-card">
+                    <div class="quick-link-icon">📊</div>
+                    <h3>SRA Database</h3>
+                    <p>Sequence Read Archive - Raw data</p>
+                </a>
+                
+                <a href="https://www.internationalgenome.org/" target="_blank" class="quick-link-card">
+                    <div class="quick-link-icon">🌍</div>
+                    <h3>1000 Genomes</h3>
+                    <p>Population genomics data</p>
+                </a>
+                
+                <a href="https://blast.ncbi.nlm.nih.gov/" target="_blank" class="quick-link-card">
+                    <div class="quick-link-icon">🔍</div>
+                    <h3>NCBI BLAST</h3>
+                    <p>Compare sequences</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>👯 Featured Twin Genetic Datasets</h2>
+            <p>Curated datasets perfect for learning and research. Click to access directly!</p>
+
+            <div class="data-card">
+                <h3>
+                    Australian Twin & Sisters Study
+                    <span class="difficulty-badge difficulty-easy">EASY</span>
+                </h3>
+                <p><strong>Best for:</strong> Beginners learning about DNA methylation and twin genetics</p>
+                
+                <div class="data-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Dataset ID</div>
+                        <div class="meta-value">GSE100227</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Twin Pairs</div>
+                        <div class="meta-value">132 pairs</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Data Type</div>
+                        <div class="meta-value">DNA Methylation</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Format</div>
+                        <div class="meta-value">Tab-delimited</div>
+                    </div>
+                </div>
+                
+                <p><strong>What's included:</strong> 66 identical twin pairs, 66 fraternal twin pairs, DNA methylation profiles</p>
+                
+                <div class="access-buttons">
+                    <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE100227" target="_blank" class="btn-access">
+                        📥 Access Dataset
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE100227#supplementary" target="_blank" class="btn-info">
+                        📄 Download Files
+                    </a>
+                </div>
+            </div>
+
+            <div class="data-card">
+                <h3>
+                    Chinese Identical Twins Epigenome Study
+                    <span class="difficulty-badge difficulty-easy">EASY</span>
+                </h3>
+                <p><strong>Best for:</strong> Understanding epigenetic differences in identical twins</p>
+                
+                <div class="data-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Dataset ID</div>
+                        <div class="meta-value">GSE65638</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Subjects</div>
+                        <div class="meta-value">8 female twins</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Data Type</div>
+                        <div class="meta-value">Methylation 450K</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Age Range</div>
+                        <div class="meta-value">21-32 years</div>
+                    </div>
+                </div>
+                
+                <p><strong>What's included:</strong> Genome-wide DNA methylation profiles from blood samples</p>
+                
+                <div class="access-buttons">
+                    <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE65638" target="_blank" class="btn-access">
+                        📥 Access Dataset
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE65638#supplementary" target="_blank" class="btn-info">
+                        📄 Download Files
+                    </a>
+                </div>
+            </div>
+
+            <div class="data-card">
+                <h3>
+                    Schizophrenia Discordant Twins Study
+                    <span class="difficulty-badge difficulty-medium">MEDIUM</span>
+                </h3>
+                <p><strong>Best for:</strong> Understanding disease genetics and epigenetic differences</p>
+                
+                <div class="data-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Dataset ID</div>
+                        <div class="meta-value">GSE61862</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Twin Pairs</div>
+                        <div class="meta-value">2 families</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Data Type</div>
+                        <div class="meta-value">Methylation 450K</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Phenotype</div>
+                        <div class="meta-value">Discordant</div>
+                    </div>
+                </div>
+                
+                <p><strong>What's included:</strong> Identical twins where one has schizophrenia and one doesn't</p>
+                
+                <div class="access-buttons">
+                    <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE61862" target="_blank" class="btn-access">
+                        📥 Access Dataset
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE61862#supplementary" target="_blank" class="btn-info">
+                        📄 Download Files
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📖 Quick Tutorial: Download Your First Dataset</h2>
+            
+            <div class="tutorial-step">
+                <h4>Step 1: Choose a Dataset</h4>
+                <p>Click on "Access Dataset" button above (try the Australian Twin Study - it's easiest)</p>
+            </div>
+            
+            <div class="tutorial-step">
+                <h4>Step 2: Navigate to Downloads</h4>
+                <p>On the GEO page, scroll down to find the <strong>"Supplementary file"</strong> section</p>
+                <img src="https://via.placeholder.com/600x100/1e293b/cbd5e1?text=Look+for+Supplementary+Files+Section" alt="Placeholder" style="width:100%; border-radius:8px; margin:10px 0;">
+            </div>
+            
+            <div class="tutorial-step">
+                <h4>Step 3: Download Files</h4>
+                <p>Click on any <code>.txt</code>, <code>.csv</code>, or <code>.xlsx</code> file to download</p>
+                <p><strong>Tip:</strong> Start with smaller files first!</p>
+            </div>
+            
+            <div class="tutorial-step">
+                <h4>Step 4: Open and Explore</h4>
+                <p>Open the file in Excel, Google Sheets, or a text editor to see the data</p>
+                <p>Look for columns like:</p>
+                <ul>
+                    <li><code>gene_name</code> or <code>gene_id</code></li>
+                    <li><code>chromosome</code></li>
+                    <li><code>position</code></li>
+                    <li><code>methylation_value</code> or <code>expression_level</code></li>
+                </ul>
+            </div>
+            
+            <div class="tutorial-step">
+                <h4>Step 5: Extract DNA Sequences (if available)</h4>
+                <p>Some datasets include actual sequences. Look for FASTA format data:</p>
+                <div class="code-block">
+                    <code>>Gene_Name or Sequence_ID<br>
+ATGCGTACGTAGCTAGCTAGCTAGCTAGCTA<br>
+GCTAGCTAGCTAGCTAGCTAGCTAGCTAGCT</code>
+                </div>
+                <p>Copy these sequences and paste into our DNA Analysis tool!</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🔧 Advanced: Getting Actual DNA Sequences</h2>
+            
+            <div class="explainer">
+                <p><strong>Note:</strong> Most twin studies focus on gene expression or methylation, not raw DNA sequences. 
+                For actual sequences, you'll need to use additional tools.</p>
+            </div>
+            
+            <h3>Option 1: Extract Specific Genes</h3>
+            <p>Once you know which genes are interesting from the twin study, get their sequences:</p>
+            
+            <div class="tutorial-step">
+                <h4>Using NCBI Gene Database</h4>
+                <ol>
+                    <li>Go to <a href="https://www.ncbi.nlm.nih.gov/gene/" target="_blank">NCBI Gene</a></li>
+                    <li>Search for your gene (e.g., "BRCA1 human")</li>
+                    <li>Click on the gene result</li>
+                    <li>Look for "Genomic regions, transcripts, and products" section</li>
+                    <li>Click "FASTA" to get the sequence</li>
+                    <li>Copy and paste into our analyzer!</li>
+                </ol>
+            </div>
+            
+            <h3>Option 2: Use NCBI's E-Utilities (Automated)</h3>
+            <p>For programmatic access, use NCBI's API:</p>
+            <div class="code-block">
+                <code># Example: Get insulin gene sequence<br>
+curl "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NM_000207&rettype=fasta" > insulin.fasta</code>
+            </div>
+            
+            <h3>Option 3: Ensembl Browser</h3>
+            <div class="tutorial-step">
+                <ol>
+                    <li>Visit <a href="https://www.ensembl.org/" target="_blank">Ensembl</a></li>
+                    <li>Search for a gene</li>
+                    <li>Click "Export Data" or "Sequence"</li>
+                    <li>Select FASTA format</li>
+                    <li>Download and analyze!</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>💡 Pro Tips</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Start Small</span>
+                    <p style="margin-top:10px; font-size:0.9rem;">Begin with gene-level data before whole genomes</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Read Metadata</span>
+                    <p style="margin-top:10px; font-size:0.9rem;">Always check the study description and methods</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Join Communities</span>
+                    <p style="margin-top:10px; font-size:0.9rem;">Ask questions on Biostars or r/bioinformatics</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Cite Your Sources</span>
+                    <p style="margin-top:10px; font-size:0.9rem;">Always reference the original studies</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🔗 Additional Resources</h2>
+            <div class="info-box">
+                <ul>
+                    <li><strong>TwinsUK Registry:</strong> <a href="https://twinsuk.ac.uk/" target="_blank">https://twinsuk.ac.uk/</a></li>
+                    <li><strong>dbGaP (Controlled Access):</strong> <a href="https://www.ncbi.nlm.nih.gov/gap/" target="_blank">https://www.ncbi.nlm.nih.gov/gap/</a></li>
+                    <li><strong>European Genome Archive:</strong> <a href="https://ega-archive.org/" target="_blank">https://ega-archive.org/</a></li>
+                    <li><strong>UCSC Genome Browser:</strong> <a href="https://genome.ucsc.edu/" target="_blank">https://genome.ucsc.edu/</a></li>
+                    <li><strong>Galaxy Project (Analysis Platform):</strong> <a href="https://usegalaxy.org/" target="_blank">https://usegalaxy.org/</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="button-group">
+                <a href="index.html" class="btn-primary">🧬 Back to DNA Analyzer</a>
+                <a href="DATA_SOURCES_GUIDE.md" class="btn-secondary" download>📥 Download Complete Guide (MD)</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>🔬 Data Access Portal • Always respect data usage agreements • 
+            <a href="https://www.ncbi.nlm.nih.gov/" target="_blank">NCBI Resources</a></p>
+        </footer>
+    </div>
+</body>
+</html>
+

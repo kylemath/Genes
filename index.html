@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNA Analysis Playground - Learn Genomics</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧬 DNA Analysis Playground</h1>
+            <p class="subtitle">Your interactive introduction to computational genomics</p>
+        </header>
+
+        <div class="info-box">
+            <h2>📚 What You'll Learn</h2>
+            <p>This interactive tool demonstrates fundamental DNA analysis techniques used in bioinformatics:</p>
+            <ul>
+                <li><strong>FASTA Format:</strong> The standard format for representing DNA sequences</li>
+                <li><strong>Nucleotide Counting:</strong> Basic composition analysis</li>
+                <li><strong>GC Content:</strong> Important for understanding DNA stability and gene expression</li>
+                <li><strong>Reverse Complement:</strong> Essential for understanding DNA's double helix structure</li>
+                <li><strong>Open Reading Frames (ORFs):</strong> Finding potential protein-coding regions</li>
+                <li><strong>Codon Analysis:</strong> Understanding how DNA encodes proteins</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🧪 Sample DNA Sequences</h2>
+            <p>Choose an example or paste your own DNA sequence:</p>
+            <div class="sample-buttons">
+                <button onclick="loadSample('ecoli')">E. coli LacZ Gene Fragment</button>
+                <button onclick="loadSample('insulin')">Human Insulin Gene Fragment</button>
+                <button onclick="loadSample('twins')">👯 Twin BRCA1 Comparison</button>
+                <button onclick="loadSample('small')">Simple Test Sequence</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📝 DNA Sequence Input</h2>
+            <div class="input-section">
+                <label for="sequenceInput">Paste DNA Sequence (FASTA format or raw sequence):</label>
+                <textarea id="sequenceInput" placeholder=">Sample Sequence
+ATGCGTACGTAGCTAGCTAGCTAGCTAGCTA..."></textarea>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="analyzeSequence()">🔬 Analyze Sequence</button>
+                    <button class="btn-secondary" onclick="clearAll()">🗑️ Clear</button>
+                    <label for="fileInput" class="btn-secondary file-label">📁 Load FASTA File</label>
+                    <input type="file" id="fileInput" accept=".fasta,.fa,.txt" style="display:none;">
+                </div>
+            </div>
+        </div>
+
+        <div id="results" class="hidden">
+            <div class="card">
+                <h2>📊 Basic Statistics</h2>
+                <div id="basicStats" class="stats-grid"></div>
+            </div>
+
+            <div class="card">
+                <h2>🎨 Nucleotide Composition</h2>
+                <div id="nucleotideChart" class="chart-container"></div>
+                <div id="gcChart" class="chart-container"></div>
+            </div>
+
+            <div class="card">
+                <h2>🔄 Reverse Complement</h2>
+                <div class="explainer">
+                    <p><strong>What is this?</strong> DNA is double-stranded with complementary base pairing (A↔T, G↔C). 
+                    The reverse complement shows the sequence of the opposite strand read in the opposite direction.</p>
+                </div>
+                <div id="reverseComplement" class="sequence-display"></div>
+            </div>
+
+            <div class="card">
+                <h2>🧬 Open Reading Frames (ORFs)</h2>
+                <div class="explainer">
+                    <p><strong>What are ORFs?</strong> Regions of DNA that could potentially code for proteins. 
+                    They start with a START codon (ATG) and end with a STOP codon (TAA, TAG, TGA).</p>
+                </div>
+                <div id="orfResults"></div>
+            </div>
+
+            <div class="card">
+                <h2>🔤 Codon Frequency</h2>
+                <div class="explainer">
+                    <p><strong>What are codons?</strong> Three-nucleotide sequences that code for amino acids. 
+                    There are 64 possible codons encoding 20 amino acids plus stop signals.</p>
+                </div>
+                <div id="codonAnalysis"></div>
+            </div>
+
+            <div class="card">
+                <h2>📈 Sequence Visualization</h2>
+                <div id="sequenceViz" class="sequence-viz"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Built with vanilla JavaScript • No external dependencies • 
+            <a href="data-access.html">🔬 Access Real Twin Data</a> • 
+            <a href="https://www.ncbi.nlm.nih.gov/" target="_blank">Learn more at NCBI</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

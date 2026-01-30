@@ -1,0 +1,46 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+*.log
+logs/
+
+
+# Files added by git-init-repo script
+genome_data/fasta/CHR21_FULL_twins_comparison.fasta
+genome_data/reference/chr17.fa
+genome_data/reference/chr21.fa
+genome_data/vcf/chr17_all.vcf.gz
+genome_data/vcf/chr21_all.vcf.gz

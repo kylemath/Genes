@@ -1,0 +1,11 @@
+{
+  "id": "Genes",
+  "title": "GeneTwinExplorer",
+  "oneLiner": "Exploring genetic data comparison and vis",
+  "demoUrl": "https://kylemath.github.io/Genes",
+  "screenshot": "https://raw.githubusercontent.com/kylemath/Genes/main/screenshot.png",
+  "kind": "project",
+  "categories": ["genetics", "webpage", "medicine"],
+  "tags": ["genetics", "webpage", "medicine"],
+  "status": "published"
+}
