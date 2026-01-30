@@ -1,5 +1,7 @@
 # 🧬 DNA Analysis Playground
 
+🚀 **[Live Demo](https://kylemath.github.io/Genes)** 🚀
+
 An interactive web application for learning computational genomics and bioinformatics. No installation required - just open in your browser!
 
 ## 🚀 Quick Start
